@@ -131,3 +131,10 @@ modules.xml
 
 # End of https://www.gitignore.io/api/node,gradle,intellij+all
 
+
+# eclipse
+
+.classpath
+.project
+.settings
+bin
