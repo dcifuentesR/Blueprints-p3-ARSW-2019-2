@@ -7,6 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="/webjars/jquery/3.1.0/jquery.min.js"></script>
 <script src="/webjars/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+
+<script src="js/apimock.js"></script>
+<script src="js/app.js"></script>
+
 <link rel="stylesheet"
 	href="/webjars/bootstrap/4.1.2/css/bootstrap.min.css" />
 </head>
@@ -15,22 +19,22 @@
 
 	<h2>Blueprints</h2>
 	<div class="topnav">
-
-		<input name="author" type="text">
-		<button type="button">Get blueprints</button>
+		<label for="author-author">Author</label> <input id=author type="text">
+		<button type="button"
+			onClick="app.updateBlueprintList($('#author').val())">Get
+			blueprints</button>
 	</div>
 	<table id="blueprints" style="width: 100%">
-		<tr>
-			<th>Blueprint name</th>
-			<th># of points</th>
-			<th>Open blueprint</th>
-		</tr>
+		<thead>
+			<tr>
+				<th>Blueprint name</th>
+				<th># of points</th>
+				<th>Open blueprint</th>
+			</tr>
+		</thead>
+		<tbody id=bprintBody>
+		</tbody>
 
-		<tr>
-			<td>BPrintName</td>
-			<td>NumPoints</td>
-			<td>open</td>
-		</tr>
 
 	</table>
 
