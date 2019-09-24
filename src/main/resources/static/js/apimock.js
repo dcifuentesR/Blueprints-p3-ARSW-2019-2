@@ -18,11 +18,11 @@ apimock = (function() {
 	}, {
 		"author" : "Satan",
 		"points" : [ {
-			"x" : 120,
-			"y" : 140
+			"x" : 10,
+			"y" : 30
 		}, {
-			"x" : 90,
-			"y" : 115
+			"x" : 10,
+			"y" : 100
 		} ],
 		"name" : "SampleBPrint"
 	}, {
@@ -59,6 +59,9 @@ apimock = (function() {
 			 */
 			return callback(null, mockdata[author]);
 
+		},
+		getBlueprintByNameAndAuthor:function(author,bprintName,callback){
+			return callback(null,mockdata[author].find(bprint => bprint.name===bprintName));
 		}
 	}
 })();
