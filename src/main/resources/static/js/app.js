@@ -16,10 +16,10 @@ var app =(function(){
 				if(error){
 					return console.log("hubo un error");
 				}else{
-					blueprints.done(function(){
+					
 						selectedAuthor = blueprints.author;
 						selectedAuthorBlueprints = blueprints;
-					});
+					
 				}
 			})
 		},

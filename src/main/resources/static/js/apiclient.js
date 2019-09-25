@@ -7,16 +7,30 @@ var apiclient = (function(){
 	return {
 		
 		getBlueprintsByAuthor : function(author, callback) {
-			$.get("http://localhost:8080/blueprints/"+author).then(function(data){
-				callback(null,data);
-			})
+			jQuery.ajax({
+                url: "http://localhost:8080/blueprints/"+author,
+                success: function (result) {
+                    callback(null,result);
+                },
+                async: false
+            });
+//			$.get("http://localhost:8080/blueprints/"+author,function(data){
+//				callback(null,data);
+//			})
 
 		},
 		getBlueprintByNameAndAuthor:function(author,bprintName,callback){
-			var blueprint = $.get("http://localhost:8080/blueprints/"+author+"/"+bprintName,function(data){
-				return data;
-			})
-			return callback(null,blueprint);
+			jQuery.ajax({
+                url:"http://localhost:8080/blueprints/"+author+"/"+bprintName,
+                success: function (result) {
+                    callback(null,result);
+                },
+                async: false
+            });
+//			var blueprint = $.get("http://localhost:8080/blueprints/"+author+"/"+bprintName,function(data){
+//				return data;
+//			})
+//			return callback(null,blueprint);
 		}
 	}
 })();
