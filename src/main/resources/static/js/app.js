@@ -12,17 +12,22 @@ var app =(function(){
 	return {
 		
 		selectAuthor:function(author){
-			apimock.getBlueprintsByAuthor(author,function(error,blueprints){
+			apiclient.getBlueprintsByAuthor(author,function(error,blueprints){
 				if(error){
 					return console.log("hubo un error");
 				}else{
-					selectedAuthor = blueprints.author;
-					selectedAuthorBlueprints = blueprints;
+					blueprints.done(function(){
+						selectedAuthor = blueprints.author;
+						selectedAuthorBlueprints = blueprints;
+					});
 				}
 			})
 		},
 		drawBlueprint:function(author,bprintName,canvas){
-			apimock.getBlueprintByNameAndAuthor(author,bprintName,function(error,blueprint){
+			apiclient.getBlueprintByNameAndAuthor(author,bprintName,function(error,blueprint){
+				if(error){
+					return console.log("hubo un error")
+				}else{
 				console.log(bprintName);
 				var ctx = canvas.getContext("2d");
 				ctx.beginPath();
@@ -32,7 +37,7 @@ var app =(function(){
 					ctx.lineTo(currentPoint.x,currentPoint.y);
 				});
 				ctx.stroke();
-				
+				}
 			})
 			
 		},
@@ -41,7 +46,8 @@ var app =(function(){
 			console.log(author);
 			bprintTable.empty();
 			this.selectAuthor(author);
-			//-------------------MAP TO OBJECT--------------------
+			console.log(typeof selectedAuthorBlueprints);
+			// -------------------MAP TO OBJECT--------------------
 			reducedBPrintList=selectedAuthorBlueprints.map(function(currentBPrint){
 				var bprints={};
 				bprints["name"]=currentBPrint.name;
@@ -49,7 +55,7 @@ var app =(function(){
 				return bprints;
 				
 			});
-			//-------------------MAP TO TABLE----------------------
+			// -------------------MAP TO TABLE----------------------
 			reducedBPrintList.forEach(function(currentBPrint){
 				var tr,td;
 				
@@ -65,16 +71,16 @@ var app =(function(){
 				btn.innerHTML = "Open";
 				td.appendChild(btn);
 				
-//				("<tr>" +
-//						"<td>"+currentBPrint.name+"</td>" +
-//						"<td>"+currentBPrint.points+"</td>" +
-//						"<td>" +
-//							"<button type='button' " +
-//							"onClick=app.drawBlueprint("+author+"','"+currentBPrint.name + "')'>" +
-//									"Open" +
-//							"</button>" +
-//						"</td>" +
-//						"</tr>");
+// ("<tr>" +
+// "<td>"+currentBPrint.name+"</td>" +
+// "<td>"+currentBPrint.points+"</td>" +
+// "<td>" +
+// "<button type='button' " +
+// "onClick=app.drawBlueprint("+author+"','"+currentBPrint.name + "')'>" +
+// "Open" +
+// "</button>" +
+// "</td>" +
+// "</tr>");
 			});
 			
 			bprintTable.append();
